@@ -1,0 +1,97 @@
+Forklaring
+
+Dependencies:
+ffmpeg
+Pillow (a PIL-fork)
+
+
+Consists of the following scripts
+(Explanation of each one is written below)
+- main.py
+- ratioConstr.py
+- multiples.py
+- generateAbsSeq.py
+- renderToFrameSeq.py
+- makeBaseFrames.py
+- generateFrames.py
+- misc.py
+- writeJSON.py
+
+
+----- main.py -----
+Main file.
+All functions from other scripts are imported to here.
+All data is generated here.
+Output paths are specified here.
+ffmpeg command is run from here to make video from frames.
+The frames are generated through the functions from the other scripts.
+
+
+----- ratioConstr.py -----
+Contains functions to make list of ratios (specification in function doc string)
+
+
+----- multiples.py -----
+Contains functions to make list of lists from the ratios from ratioConstr.py.
+Specification in doc strings.
+
+
+----- generateAbsSeq.py -----
+Contains functions to make a sequence of dictionaries. These dictionaries can
+contain info on which shape, which color and duration (absolute duration in seconds).
+You can pass both, but must only pass one of shapes or colors as argument. If one
+is left empty the function will use default values (as specified in function).
+Colors can be passed as either "R", "G", "B" (for 'red', 'green', 'blue'), or black
+or as an RGB-tuple (ie. '(255,255,255)'')
+
+Output format (example):
+[
+{"type":header, "framerate":30},
+{"type":"event", "color":"R", "shape":"Circle", "duration":0.5},
+{"type":"event", "color":"Black", "shape":"None", "duration":1.5},
+{"type":"event", "color":"G", "shape":"Triangle", "duration":2.5},
+]
+
+Other function specifications are in the doc string.
+
+
+----- renderToFrameSeq.py -----
+Contains functions to render the Absolute sequence to a sequence of dictionaries,
+where each dictionary corresponds to a frame for an animation video.
+Output format example and further specification in doc string.
+
+
+----- makeBaseFrames.py -----
+Contains functions which makes a dictionary of dictionaries, each containg a list
+of images which will be used when generating frames (png-images) for the animation
+video. This is done to save processing power. Each image is not created anew for
+each frame (a time consuming process) but rather copied and saved from these lists
+of BaseFrames.
+Each list contains several images of different sizes (how many images and minsize
+and maxsize is specified as parameter when making list). When generating frames
+in the next function (generateFrames.py) a random image from this list is selected.
+Thus, if there are several images in a list, a "flimmer"-effect occurs, because of
+the rapid change of the size of the figure.
+{
+"rectangleR" : {"metadata":"metadata", "list":[... list of images of red rectangles of different sizes ...]},
+"triangleB" : {"metadata":"metadata", "list":[... list of images of blue triangles of different sizes ...]},
+etc...
+}
+
+----- generateFrames.py -----
+Outputs frames according to the frame_sequence given as parameter. Outputs to a
+given path. A frame_sequence of length 30 (excluding header) thus outputs a total of 30 frames.
+
+
+
+
+
+----- misc.py -----
+Contains miscellanous functions. (i.e. return a list containing info on all the
+colors or all shapes in a sequence).
+
+
+----- writeJSON.py -----
+Outputs dictionaries (i.e. Absolute Sequence) as JSON file.
+Will try to parse it in SuperCollider or somewhere it can be done sample synchronous
+so that a soundtrack can be made which matches exactly the timings of the video.
