@@ -8,7 +8,7 @@
 Prosjektmappe for video-stykket 'Flimmering'. Brukte Python, Pillow (Python Image Library), SuperCollider og ffmpeg for å lage videofiler. Python-scripts med data (i 'score_files') fungerer som partitur for stykket.
 
 
-Videofil ligger i [Examples](./Example)
+Videofil ligger i [Example](./Example)
 
 
 # ToDo
