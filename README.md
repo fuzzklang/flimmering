@@ -7,7 +7,7 @@
 
 Prosjektmappe for video-stykket 'Flimmering'. Brukte Python, Pillow (Python Image Library), SuperCollider og ffmpeg for å lage videofiler. Python-scripts med data (i 'score_files') fungerer som partitur for stykket.
 
-Laget i og fremført ved Musikkhøgskolen i Frankfurt våren 2018.
+Laget og fremført ved Musikkhøgskolen i Frankfurt våren 2018.
 
 Videofil ligger i [Example](./Example), eller kan ses på [Vimeo](https://vimeo.com/479299448)
 
